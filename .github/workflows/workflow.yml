@@ -1,0 +1,34 @@
+name: Pull Request Based Workflow
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  deploy-staging:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Staging Deployment
+        run: |
+          echo "Deploying to Staging (develop branch)"
+          # Add your staging deployment commands here
+          echo "Deployment to staging completed."
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Production Deployment
+        run: |
+          echo "Deploying to Production (main branch)"
+          # Add your production deployment commands here
+          echo "Deployment to production completed."
